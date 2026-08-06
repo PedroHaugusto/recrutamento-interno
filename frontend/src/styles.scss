@@ -5,35 +5,67 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-html {
-  height: 100%;
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: Roboto,
-      density: 0,
-    )
-  );
+:root {
+  --cor-primaria: #0F3D5C;
+  --cor-primaria-clara: #1D5A80;
+  --cor-primaria-escura: #082A3F;
+  --cor-destaque: #C9A24B;
+  --cor-destaque-clara: #DBBE7C;
+  --cor-fundo: #F5F7FA;
+  --cor-superficie: #FFFFFF;
+  --cor-texto-principal: #1A2733;
+  --cor-texto-secundario: #5A6B7A;
+  --cor-borda: #E1E6EB;
+  --cor-sucesso: #2E7D5B;
+  --cor-erro: #B3261E;
+  --cor-alerta: #B8860B;
+
+  --fonte-titulo: 'Poppins', 'Segoe UI', sans-serif;
+  --fonte-corpo: 'Inter', 'Segoe UI', sans-serif;
+
+  --espaco-xs: 4px;
+  --espaco-sm: 8px;
+  --espaco-md: 16px;
+  --espaco-lg: 24px;
+  --espaco-xl: 40px;
+  --raio-borda: 10px;
+  --sombra-card: 0 2px 12px rgba(15, 61, 92, 0.08);
 }
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
+html, body {
+  height: 100%;
   margin: 0;
-  height: 100%;
+  font-family: var(--fonte-corpo);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto-principal);
 }
-/* You can add global styles to this file, and also import other style files */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  color: var(--cor-primaria-escura);
+}
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$orange-palette,
+    ),
+    typography: (
+      plain-family: 'Inter',
+      brand-family: 'Poppins',
+    ),
+    density: 0
+  ));
+}
+
+// Sobrescreve botoes "raised" primarios para usar nosso azul marinho
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: var(--cor-primaria);
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  --mdc-protected-button-container-color: var(--cor-primaria-clara);
+}
