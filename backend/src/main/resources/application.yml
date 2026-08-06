@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/recrutamento_interno
+    url: jdbc:postgresql://localhost:5432/recrutamento_interno?stringtype=unspecified
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
