@@ -35,12 +35,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
                 .antMatchers(ROTAS_PUBLICAS).permitAll()
+                .antMatchers(HttpMethod.POST, "/vagas/*/candidaturas").hasRole("CANDIDATO")
+                .antMatchers(HttpMethod.GET, "/vagas/*/candidaturas").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/candidaturas/minhas").authenticated()
                 .antMatchers(HttpMethod.GET, "/vagas/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/vagas/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/vagas/**").hasRole("ADMIN")
