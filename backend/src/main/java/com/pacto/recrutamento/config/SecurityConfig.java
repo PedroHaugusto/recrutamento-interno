@@ -5,6 +5,7 @@ import com.pacto.recrutamento.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -23,8 +24,6 @@ public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthFilter jwtAuthFilter;
-
-    // Rotas que NAO exigem autenticacao
     private static final String[] ROTAS_PUBLICAS = {
             "/auth/**",
             "/swagger-ui/**",
@@ -35,18 +34,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // API stateless (sem sessao) -> CSRF nao se aplica
                 .csrf().disable()
 
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-
                 .authorizeHttpRequests()
                 .antMatchers(ROTAS_PUBLICAS).permitAll()
+                .antMatchers(HttpMethod.GET, "/vagas/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/vagas/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/vagas/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/vagas/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
