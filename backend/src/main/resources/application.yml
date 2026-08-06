@@ -23,7 +23,7 @@ spring:
     baseline-on-migrate: true
 
 jwt:
-  secret:
+  secret: ctYJVP86zoeDYr8rPNaRpLxnpDQMgypsOudmBYw8dBPq4HuHkT6dR6WRnc8Om5ar
   expiration: 86400000
 
 springdoc:
