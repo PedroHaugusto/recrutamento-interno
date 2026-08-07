@@ -1,16 +1,16 @@
-<div class="layout">
+﻿<div class="layout">
   <mat-toolbar class="topo">
     <span class="topo__marca" routerLink="/vagas">Recrutamento Interno</span>
 
     <span class="topo__espaco"></span>
 
     @if (authService.ehAdmin()) {
-    <span class="topo__selo">ADMIN</span>
+      <span class="topo__selo">ADMIN</span>
     } @else {
-    <a mat-button routerLink="/candidaturas/minhas" class="topo__link">
-      <mat-icon>assignment</mat-icon>
-      Minhas Candidaturas
-    </a>
+      <a mat-button routerLink="/candidaturas/minhas" class="topo__link">
+        <mat-icon>assignment</mat-icon>
+        <span class="topo__link-texto">Minhas Candidaturas</span>
+      </a>
     }
 
     <button mat-icon-button [matMenuTriggerFor]="menuUsuario" class="topo__usuario">
