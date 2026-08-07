@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>{{ ehEdicao ? 'Editar Vaga' : 'Nova Vaga' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="conteudo-dialogo">
+
+    <mat-form-field appearance="outline" class="campo-completo">
+      <mat-label>Titulo</mat-label>
+      <input matInput formControlName="titulo" />
+      @if (form.get('titulo')?.hasError('required') && form.get('titulo')?.touched) {
+      <mat-error>Titulo e obrigatorio</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="campo-completo">
+      <mat-label>Descricao</mat-label>
+      <textarea matInput formControlName="descricao" rows="4"></textarea>
+      @if (form.get('descricao')?.hasError('required') && form.get('descricao')?.touched) {
+      <mat-error>Descricao e obrigatoria</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="campo-completo">
+      <mat-label>Requisitos (opcional)</mat-label>
+      <textarea matInput formControlName="requisitos" rows="3"></textarea>
+    </mat-form-field>
+
+    @if (ehEdicao) {
+    <mat-form-field appearance="outline" class="campo-completo">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="ABERTA">Aberta</mat-option>
+        <mat-option value="FECHADA">Fechada</mat-option>
+      </mat-select>
+    </mat-form-field>
+    }
+
+    @if (erro()) {
+    <div class="mensagem-erro">{{ erro() }}</div>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="salvando()">
+      @if (salvando()) {
+      <mat-spinner diameter="18"></mat-spinner>
+      } @else {
+      {{ ehEdicao ? 'Salvar alteracoes' : 'Criar vaga' }}
+      }
+    </button>
+  </mat-dialog-actions>
+</form>
