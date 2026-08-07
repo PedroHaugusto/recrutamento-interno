@@ -1,8 +1,3 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
 :root {
@@ -46,6 +41,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--cor-primaria-escura);
 }
 
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
 html {
   @include mat.theme((
     color: (
@@ -61,7 +61,6 @@ html {
   ));
 }
 
-// Sobrescreve botoes "raised" primarios para usar nosso azul marinho
 .mat-mdc-raised-button.mat-primary {
   --mdc-protected-button-container-color: var(--cor-primaria);
 }
