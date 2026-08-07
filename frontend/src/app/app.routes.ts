@@ -23,6 +23,13 @@ export const routes: Routes = [
         path: 'vagas',
         loadComponent: () =>
           import('./vagas/vagas-list/vagas-list.component').then((m) => m.VagasListComponent)
+      },
+      {
+        path: 'candidaturas/minhas',
+        loadComponent: () =>
+          import('./candidaturas/minhas-candidaturas/minhas-candidaturas.component').then(
+            (m) => m.MinhasCandidaturasComponent
+          )
       }
     ]
   }
