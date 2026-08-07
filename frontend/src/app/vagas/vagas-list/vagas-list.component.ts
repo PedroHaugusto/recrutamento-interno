@@ -42,6 +42,7 @@ export class VagasListComponent implements OnInit {
   readonly carregando = signal(true);
   readonly candidatandoId = signal<number | null>(null);
 
+  // IDs das vagas as quais o candidato logado ja se candidatou
   private readonly vagaIdsCandidatadas = signal<Set<number>>(new Set());
 
   readonly vagasOrdenadas = computed(() =>
@@ -66,6 +67,8 @@ export class VagasListComponent implements OnInit {
       return;
     }
 
+    // Candidato: carrega vagas E suas candidaturas em paralelo,
+    // para saber em quais vagas ja se candidatou.
     forkJoin({
       vagas: this.vagaService.listar(),
       minhas: this.candidaturaService.listarMinhas()
@@ -96,7 +99,7 @@ export class VagasListComponent implements OnInit {
       },
       error: () => {
         this.candidatandoId.set(null);
-        this.snackBar.open('Não foi possível enviar sua candidatura.', 'Fechar', { duration: 4000 });
+        this.snackBar.open('Nao foi possivel enviar sua candidatura.', 'Fechar', { duration: 4000 });
       }
     });
   }
@@ -104,6 +107,7 @@ export class VagasListComponent implements OnInit {
   abrirFormularioNovaVaga(): void {
     const ref = this.dialog.open(VagaFormDialogComponent, {
       width: '520px',
+      maxWidth: '95vw',
       data: null
     });
 
@@ -117,6 +121,7 @@ export class VagasListComponent implements OnInit {
   editarVaga(vaga: Vaga): void {
     const ref = this.dialog.open(VagaFormDialogComponent, {
       width: '520px',
+      maxWidth: '95vw',
       data: vaga
     });
 
@@ -128,17 +133,17 @@ export class VagasListComponent implements OnInit {
   }
 
   excluirVaga(vaga: Vaga): void {
-    if (!confirm(`Excluir a vaga "${vaga.titulo}"? Essa ação não pode ser desfeita.`)) {
+    if (!confirm(`Excluir a vaga "${vaga.titulo}"? Essa acao nao pode ser desfeita.`)) {
       return;
     }
 
     this.vagaService.excluir(vaga.id).subscribe({
       next: () => {
-        this.snackBar.open('Vaga excluída.', 'Fechar', { duration: 3000 });
+        this.snackBar.open('Vaga excluida.', 'Fechar', { duration: 3000 });
         this.carregarDados();
       },
       error: () => {
-        this.snackBar.open('Não foi possível excluir a vaga.', 'Fechar', { duration: 4000 });
+        this.snackBar.open('Nao foi possivel excluir a vaga.', 'Fechar', { duration: 4000 });
       }
     });
   }

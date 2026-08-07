@@ -9,11 +9,21 @@
   h1 {
     margin: 0 0 var(--espaco-xs);
     font-size: 1.6rem;
+
+    @media (max-width: 480px) {
+      font-size: 1.3rem;
+    }
   }
 
   p {
     margin: 0;
     color: var(--cor-texto-secundario);
+  }
+
+  @media (max-width: 480px) {
+    button {
+      width: 100%;
+    }
   }
 }
 
@@ -39,6 +49,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--espaco-md);
+
+  @media (max-width: 380px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .cartao-vaga {
