@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/recrutamento_interno?stringtype=unspecified
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/recrutamento_interno?stringtype=unspecified}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -23,7 +23,7 @@ spring:
     baseline-on-migrate: true
 
 jwt:
-  secret: ctYJVP86zoeDYr8rPNaRpLxnpDQMgypsOudmBYw8dBPq4HuHkT6dR6WRnc8Om5ar
+  secret: ${JWT_SECRET:ctYJVP86zoeDYr8rPNaRpLxnpDQMgypsOudmBYw8dBPq4HuHkT6dR6WRnc8Om5ar}
   expiration: 86400000
 
 springdoc:
