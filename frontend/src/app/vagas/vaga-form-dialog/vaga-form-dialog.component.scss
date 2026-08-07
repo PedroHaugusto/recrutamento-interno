@@ -1,0 +1,21 @@
+.conteudo-dialogo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-xs);
+  min-width: 420px;
+  padding-top: var(--espaco-xs);
+}
+
+.campo-completo {
+  width: 100%;
+}
+
+.mensagem-erro {
+  color: var(--cor-erro);
+  font-size: 0.85rem;
+  margin-bottom: var(--espaco-sm);
+}
+
+mat-spinner {
+  display: inline-block;
+}

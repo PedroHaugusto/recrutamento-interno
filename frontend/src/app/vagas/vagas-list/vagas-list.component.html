@@ -1,0 +1,86 @@
+<div class="pagina-vagas">
+  <header class="cabecalho">
+    <div>
+      <h1>Vagas Internas</h1>
+      <p>Explore oportunidades disponíveis dentro da empresa</p>
+    </div>
+
+    @if (authService.ehAdmin()) {
+    <button mat-raised-button color="primary" (click)="abrirFormularioNovaVaga()">
+      <mat-icon>add</mat-icon>
+      Nova Vaga
+    </button>
+    }
+  </header>
+
+  @if (carregando()) {
+  <div class="estado-carregando">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+  } @else if (vagasOrdenadas().length === 0) {
+  <div class="estado-vazio">
+    <mat-icon>work_off</mat-icon>
+    <p>Nenhuma vaga cadastrada ainda.</p>
+  </div>
+  } @else {
+  <div class="grade-vagas">
+    @for (vaga of vagasOrdenadas(); track vaga.id) {
+    <mat-card class="cartao-vaga" [class.cartao-vaga--fechada]="vaga.status === 'FECHADA'">
+      <mat-card-header>
+        <mat-card-title>{{ vaga.titulo }}</mat-card-title>
+        <mat-card-subtitle>Responsável: {{ vaga.responsavelNome }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-chip-set>
+          <mat-chip [class]="'selo-status selo-status--' + vaga.status.toLowerCase()">
+            {{ vaga.status === 'ABERTA' ? 'Aberta' : 'Fechada' }}
+          </mat-chip>
+        </mat-chip-set>
+
+        <p class="descricao">{{ vaga.descricao }}</p>
+
+        @if (vaga.requisitos) {
+        <p class="requisitos"><strong>Requisitos:</strong> {{ vaga.requisitos }}</p>
+        }
+      </mat-card-content>
+
+      <mat-card-actions class="acoes">
+        @if (authService.ehAdmin()) {
+        <button mat-button (click)="editarVaga(vaga)">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-button color="warn" (click)="excluirVaga(vaga)">
+          <mat-icon>delete</mat-icon>
+          Excluir
+        </button>
+        } @else {
+        @if (jaCandidatou(vaga.id)) {
+        <button mat-button disabled>
+          <mat-icon>check_circle</mat-icon>
+          Ja candidatado
+        </button>
+        } @else if (vaga.status === 'FECHADA') {
+        <button mat-button disabled>Vaga fechada</button>
+        } @else {
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="candidatar(vaga)"
+          [disabled]="candidatandoId() === vaga.id"
+        >
+          @if (candidatandoId() === vaga.id) {
+          <mat-spinner diameter="18"></mat-spinner>
+          } @else {
+          Candidatar-se
+          }
+        </button>
+        }
+        }
+      </mat-card-actions>
+    </mat-card>
+    }
+  </div>
+  }
+</div>

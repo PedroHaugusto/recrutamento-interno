@@ -1,0 +1,71 @@
+.layout {
+  min-height: 100vh;
+  background-color: var(--cor-fundo);
+}
+
+.topo {
+  background-color: var(--cor-primaria) !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &__marca {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+  }
+
+  &__espaco {
+    flex: 1 1 auto;
+  }
+
+  &__selo {
+    background-color: var(--cor-destaque);
+    color: var(--cor-primaria-escura);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-right: var(--espaco-sm);
+  }
+
+  &__link {
+    color: white !important;
+    margin-right: var(--espaco-xs);
+
+    mat-icon {
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+  }
+
+  &__usuario {
+    color: white !important;
+  }
+}
+
+.menu-usuario {
+  &__nome {
+    padding: var(--espaco-sm) var(--espaco-md) 0;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+  }
+
+  &__email {
+    padding: 0 var(--espaco-md) var(--espaco-sm);
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: var(--espaco-xs);
+  }
+}
+
+.conteudo {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--espaco-lg) var(--espaco-md);
+}

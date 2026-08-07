@@ -1,0 +1,33 @@
+<div class="layout">
+  <mat-toolbar class="topo">
+    <span class="topo__marca" routerLink="/vagas">Recrutamento Interno</span>
+
+    <span class="topo__espaco"></span>
+
+    @if (authService.ehAdmin()) {
+    <span class="topo__selo">ADMIN</span>
+    } @else {
+    <a mat-button routerLink="/candidaturas/minhas" class="topo__link">
+      <mat-icon>assignment</mat-icon>
+      Minhas Candidaturas
+    </a>
+    }
+
+    <button mat-icon-button [matMenuTriggerFor]="menuUsuario" class="topo__usuario">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <mat-menu #menuUsuario="matMenu">
+      <div class="menu-usuario__nome">{{ authService.usuario()?.nome }}</div>
+      <div class="menu-usuario__email">{{ authService.usuario()?.email }}</div>
+      <button mat-menu-item (click)="sair()">
+        <mat-icon>logout</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <main class="conteudo">
+    <router-outlet />
+  </main>
+</div>
