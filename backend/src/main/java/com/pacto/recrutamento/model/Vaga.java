@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -36,11 +35,9 @@ public class Vaga {
     @Column(nullable = false, length = 150)
     private String titulo;
 
-    @Lob
     @Column(nullable = false, columnDefinition = "TEXT")
     private String descricao;
 
-    @Lob
     @Column(columnDefinition = "TEXT")
     private String requisitos;
 
