@@ -1,0 +1,34 @@
+<div class="pagina-candidaturas">
+  <header class="cabecalho">
+    <h1>Minhas Candidaturas</h1>
+    <p>Acompanhe o status das vagas para as quais voce se candidatou</p>
+  </header>
+
+  @if (carregando()) {
+  <div class="estado-carregando">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+  } @else if (candidaturas().length === 0) {
+  <div class="estado-vazio">
+    <mat-icon>assignment_late</mat-icon>
+    <p>Voce ainda nao se candidatou a nenhuma vaga.</p>
+  </div>
+  } @else {
+  <div class="lista-candidaturas">
+    @for (candidatura of candidaturas(); track candidatura.id) {
+    <mat-card class="cartao-candidatura">
+      <mat-card-content class="conteudo-cartao">
+        <div class="info-principal">
+          <h3>{{ candidatura.vagaTitulo }}</h3>
+          <p class="data">Candidatura enviada em {{ formatarData(candidatura.dataCandidatura) }}</p>
+        </div>
+
+        <mat-chip [class]="'selo-status selo-status--' + candidatura.status.toLowerCase()">
+          {{ rotuloStatus(candidatura.status) }}
+        </mat-chip>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+  }
+</div>

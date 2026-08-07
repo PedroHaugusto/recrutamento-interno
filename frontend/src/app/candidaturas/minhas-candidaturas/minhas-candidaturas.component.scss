@@ -1,0 +1,91 @@
+.cabecalho {
+  margin-bottom: var(--espaco-lg);
+
+  h1 {
+    margin: 0 0 var(--espaco-xs);
+    font-size: 1.6rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--cor-texto-secundario);
+  }
+}
+
+.estado-carregando,
+.estado-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco-xl) 0;
+  color: var(--cor-texto-secundario);
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--espaco-sm);
+    opacity: 0.4;
+  }
+}
+
+.lista-candidaturas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-sm);
+}
+
+.cartao-candidatura {
+  border-radius: var(--raio-borda);
+  box-shadow: var(--sombra-card);
+}
+
+.conteudo-cartao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-md);
+  flex-wrap: wrap;
+}
+
+.info-principal {
+  h3 {
+    margin: 0 0 4px;
+    font-size: 1.05rem;
+    color: var(--cor-texto-principal);
+  }
+
+  .data {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--cor-texto-secundario);
+  }
+}
+
+.selo-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+
+  &--pendente {
+    background-color: #FFF4E0 !important;
+    color: var(--cor-alerta) !important;
+  }
+
+  &--em_analise {
+    background-color: #E3EEF7 !important;
+    color: var(--cor-primaria-clara) !important;
+  }
+
+  &--aprovado {
+    background-color: #e3f3ec !important;
+    color: var(--cor-sucesso) !important;
+  }
+
+  &--rejeitado {
+    background-color: #FBE9E7 !important;
+    color: var(--cor-erro) !important;
+  }
+}
