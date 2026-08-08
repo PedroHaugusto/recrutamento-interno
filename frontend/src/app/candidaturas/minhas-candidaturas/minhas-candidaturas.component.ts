@@ -9,7 +9,7 @@ import { Candidatura, StatusCandidatura } from '../../models/candidatura.model';
 
 const ROTULOS_STATUS: Record<StatusCandidatura, string> = {
   PENDENTE: 'Pendente',
-  EM_ANALISE: 'Em analise',
+  EM_ANALISE: 'Em análise',
   APROVADO: 'Aprovado',
   REJEITADO: 'Rejeitado'
 };
