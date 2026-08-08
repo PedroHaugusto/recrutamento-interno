@@ -4,18 +4,18 @@
   <mat-dialog-content class="conteudo-dialogo">
 
     <mat-form-field appearance="outline" class="campo-completo">
-      <mat-label>Titulo</mat-label>
+      <mat-label>Título</mat-label>
       <input matInput formControlName="titulo" />
       @if (form.get('titulo')?.hasError('required') && form.get('titulo')?.touched) {
-      <mat-error>Titulo e obrigatorio</mat-error>
+      <mat-error>Título é obrigatório</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="campo-completo">
-      <mat-label>Descricao</mat-label>
+      <mat-label>Descrição</mat-label>
       <textarea matInput formControlName="descricao" rows="4"></textarea>
       @if (form.get('descricao')?.hasError('required') && form.get('descricao')?.touched) {
-      <mat-error>Descricao e obrigatoria</mat-error>
+      <mat-error>Descrição é obrigatória</mat-error>
       }
     </mat-form-field>
 
@@ -45,7 +45,7 @@
       @if (salvando()) {
       <mat-spinner diameter="18"></mat-spinner>
       } @else {
-      {{ ehEdicao ? 'Salvar alteracoes' : 'Criar vaga' }}
+      {{ ehEdicao ? 'Salvar alterações' : 'Criar vaga' }}
       }
     </button>
   </mat-dialog-actions>
