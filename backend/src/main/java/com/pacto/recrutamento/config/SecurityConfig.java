@@ -87,7 +87,8 @@ public class SecurityConfig {
                 "http://localhost",
                 "http://localhost:80",
                 "http://18.118.211.249",
-                "http://recrutamento-pacto.duckdns.org"
+                "http://recrutamento-pacto.duckdns.org",
+                "https://recrutamento-pacto.duckdns.org"
         ));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
