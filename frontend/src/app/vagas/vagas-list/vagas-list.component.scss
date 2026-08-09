@@ -56,19 +56,25 @@
 }
 
 .cartao-vaga {
+  --mdc-elevated-card-container-color: var(--cor-superficie);
+  background-color: var(--cor-superficie);
+
   border-radius: var(--raio-borda);
-  box-shadow: var(--sombra-card);
+  border: 1px solid var(--cor-borda);
+  border-left: 4px solid var(--cor-sucesso);
+  box-shadow: 0 1px 3px rgba(15, 61, 92, 0.1), 0 1px 2px rgba(15, 61, 92, 0.06);
   display: flex;
   flex-direction: column;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(15, 61, 92, 0.14);
+    box-shadow: 0 8px 24px rgba(15, 61, 92, 0.16);
   }
 
   &--fechada {
     opacity: 0.7;
+    border-left-color: var(--cor-texto-secundario);
   }
 }
 
@@ -86,6 +92,21 @@
     background-color: #f1f1f1 !important;
     color: var(--cor-texto-secundario) !important;
   }
+}
+
+::ng-deep .cartao-vaga .mat-mdc-card-header-text {
+  width: 100%;
+}
+
+::ng-deep .cartao-vaga .mat-mdc-card-title {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  color: var(--cor-primaria-escura);
+}
+
+::ng-deep .cartao-vaga .mat-mdc-card-subtitle {
+  color: var(--cor-texto-secundario) !important;
+  font-size: 0.82rem;
 }
 
 .descricao {
