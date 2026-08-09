@@ -22,22 +22,21 @@ public class CandidaturaService {
     private final VagaRepository vagaRepository;
     private final NotificacaoService notificacaoService;
 
-    public CandidaturaResponse candidatar(Long vagaId, Usuario candidato) {
+    public CandidaturaResponse candidatar(Long vagaId, Usuario candidato, Integer tempoExperienciaAnos) {
         Vaga vaga = vagaRepository.findById(vagaId)
-                .orElseThrow(() -> new ResourceNotFoundException("Vaga nao encontrada: id " + vagaId));
+                .orElseThrow(() -> new ResourceNotFoundException("Vaga não encontrada: id " + vagaId));
 
         if (candidaturaRepository.existsByVagaIdAndCandidatoId(vagaId, candidato.getId())) {
-            throw new BusinessException("Voce ja se candidatou a esta vaga");
+            throw new BusinessException("Você já se candidatou a esta vaga");
         }
 
         Candidatura candidatura = Candidatura.builder()
                 .vaga(vaga)
                 .candidato(candidato)
+                .tempoExperienciaAnos(tempoExperienciaAnos)
                 .build();
 
         candidaturaRepository.save(candidatura);
-
-        // Notifica o responsavel pela vaga e o proprio candidato
         notificacaoService.notificar(
                 vaga.getResponsavel(),
                 "Nova candidatura recebida para a vaga \"" + vaga.getTitulo() + "\" de " + candidato.getNome()
@@ -59,7 +58,7 @@ public class CandidaturaService {
 
     public List<CandidaturaResponse> listarPorVaga(Long vagaId) {
         if (!vagaRepository.existsById(vagaId)) {
-            throw new ResourceNotFoundException("Vaga nao encontrada: id " + vagaId);
+            throw new ResourceNotFoundException("Vaga não encontrada: id " + vagaId);
         }
 
         return candidaturaRepository.findByVagaId(vagaId)
@@ -76,6 +75,7 @@ public class CandidaturaService {
                 .candidatoNome(candidatura.getCandidato().getNome())
                 .status(candidatura.getStatus())
                 .dataCandidatura(candidatura.getDataCandidatura())
+                .tempoExperienciaAnos(candidatura.getTempoExperienciaAnos())
                 .build();
     }
 }

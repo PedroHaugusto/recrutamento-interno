@@ -18,4 +18,5 @@ public class CandidaturaResponse {
     private String candidatoNome;
     private StatusCandidatura status;
     private LocalDateTime dataCandidatura;
+    private Integer tempoExperienciaAnos;
 }

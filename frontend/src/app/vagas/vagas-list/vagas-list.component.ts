@@ -13,6 +13,7 @@ import { VagaService } from '../../core/services/vaga.service';
 import { CandidaturaService } from '../../core/services/candidatura.service';
 import { Vaga } from '../../models/vaga.model';
 import { VagaFormDialogComponent } from '../vaga-form-dialog/vaga-form-dialog.component';
+import { CandidaturaFormDialogComponent, CandidaturaFormResultado } from '../candidatura-form-dialog/candidatura-form-dialog.component';
 
 @Component({
   selector: 'app-vagas-list',
@@ -83,20 +84,32 @@ export class VagasListComponent implements OnInit {
   }
 
   candidatar(vaga: Vaga): void {
-    this.candidatandoId.set(vaga.id);
+    const ref = this.dialog.open(CandidaturaFormDialogComponent, {
+      width: '460px',
+      maxWidth: '95vw',
+      data: vaga
+    });
 
-    this.candidaturaService.candidatar(vaga.id).subscribe({
-      next: () => {
-        this.candidatandoId.set(null);
-        const atual = new Set(this.vagaIdsCandidatadas());
-        atual.add(vaga.id);
-        this.vagaIdsCandidatadas.set(atual);
-        this.snackBar.open('Candidatura enviada com sucesso!', 'Fechar', { duration: 4000 });
-      },
-      error: () => {
-        this.candidatandoId.set(null);
-        this.snackBar.open('Não foi possível enviar sua candidatura.', 'Fechar', { duration: 4000 });
+    ref.afterClosed().subscribe((resultado: CandidaturaFormResultado | null) => {
+      if (!resultado) {
+        return;
       }
+
+      this.candidatandoId.set(vaga.id);
+
+      this.candidaturaService.candidatar(vaga.id, resultado).subscribe({
+        next: () => {
+          this.candidatandoId.set(null);
+          const atual = new Set(this.vagaIdsCandidatadas());
+          atual.add(vaga.id);
+          this.vagaIdsCandidatadas.set(atual);
+          this.snackBar.open('Candidatura enviada com sucesso!', 'Fechar', { duration: 4000 });
+        },
+        error: () => {
+          this.candidatandoId.set(null);
+          this.snackBar.open('Não foi possível enviar sua candidatura.', 'Fechar', { duration: 4000 });
+        }
+      });
     });
   }
 

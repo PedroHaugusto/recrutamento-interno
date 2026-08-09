@@ -1,0 +1,24 @@
+.conteudo-dialogo {
+  display: flex;
+  flex-direction: column;
+  min-width: min(400px, 82vw);
+  padding-top: var(--espaco-xs);
+}
+
+.vaga-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  color: var(--cor-primaria-escura);
+  margin: 0 0 var(--espaco-xs);
+}
+
+.instrucao {
+  color: var(--cor-texto-secundario);
+  font-size: 0.88rem;
+  margin: 0 0 var(--espaco-md);
+  line-height: 1.5;
+}
+
+.campo-completo {
+  width: 100%;
+}

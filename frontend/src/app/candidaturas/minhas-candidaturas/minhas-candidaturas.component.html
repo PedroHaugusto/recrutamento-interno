@@ -21,6 +21,12 @@
         <div class="info-principal">
           <h3>{{ candidatura.vagaTitulo }}</h3>
           <p class="data">Candidatura enviada em {{ formatarData(candidatura.dataCandidatura) }}</p>
+          @if (candidatura.tempoExperienciaAnos !== null) {
+          <p class="experiencia">
+            Experiência informada: {{ candidatura.tempoExperienciaAnos }}
+            {{ candidatura.tempoExperienciaAnos === 1 ? 'ano' : 'anos' }}
+          </p>
+          }
         </div>
 
         <mat-chip [class]="'selo-status selo-status--' + candidatura.status.toLowerCase()">

@@ -1,5 +1,6 @@
 package com.pacto.recrutamento.controller;
 
+import com.pacto.recrutamento.dto.CandidaturaRequest;
 import com.pacto.recrutamento.dto.CandidaturaResponse;
 import com.pacto.recrutamento.model.Usuario;
 import com.pacto.recrutamento.service.CandidaturaService;
@@ -12,9 +13,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,9 +31,12 @@ public class CandidaturaController {
     @Operation(summary = "Candidata-se a uma vaga (somente CANDIDATO)")
     public ResponseEntity<CandidaturaResponse> candidatar(
             @PathVariable Long vagaId,
+            @Valid @RequestBody CandidaturaRequest request,
             @AuthenticationPrincipal Usuario usuarioLogado
     ) {
-        CandidaturaResponse response = candidaturaService.candidatar(vagaId, usuarioLogado);
+        CandidaturaResponse response = candidaturaService.candidatar(
+                vagaId, usuarioLogado, request.getTempoExperienciaAnos()
+        );
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
