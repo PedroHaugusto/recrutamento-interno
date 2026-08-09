@@ -63,7 +63,7 @@ export class LoginComponent {
         this.erro.set(
           err.status === 401
             ? 'E-mail ou senha incorretos'
-            : 'Nao foi possivel conectar. Tente novamente.'
+            : 'Não foi possível conectar. Tente novamente.'
         );
       }
     });

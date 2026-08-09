@@ -42,7 +42,6 @@ export class VagasListComponent implements OnInit {
   readonly vagas = signal<Vaga[]>([]);
   readonly carregando = signal(true);
   readonly candidatandoId = signal<number | null>(null);
-
   private readonly vagaIdsCandidatadas = signal<Set<number>>(new Set());
 
   readonly vagasOrdenadas = computed(() =>
