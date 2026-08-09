@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://recrutamento-pacto.duckdns.org:8080'
+  apiUrl: 'https://recrutamento-pacto.duckdns.org/api'
 };
