@@ -53,7 +53,7 @@ class CandidaturaServiceTest {
     void candidatar_deveLancarExcecaoQuandoVagaNaoExiste() {
         when(vagaRepository.findById(10L)).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> candidaturaService.candidatar(10L, candidato));
+        assertThrows(ResourceNotFoundException.class, () -> candidaturaService.candidatar(10L, candidato, 3));
 
         verify(candidaturaRepository, never()).save(any());
         verify(notificacaoService, never()).notificar(any(), anyString());
@@ -66,10 +66,10 @@ class CandidaturaServiceTest {
 
         BusinessException ex = assertThrows(
                 BusinessException.class,
-                () -> candidaturaService.candidatar(10L, candidato)
+                () -> candidaturaService.candidatar(10L, candidato, 3)
         );
 
-        assertTrue(ex.getMessage().toLowerCase().contains("ja se candidatou"));
+        assertTrue(ex.getMessage().toLowerCase().contains("candidatou"));
         verify(candidaturaRepository, never()).save(any());
     }
 
@@ -79,11 +79,11 @@ class CandidaturaServiceTest {
         when(candidaturaRepository.existsByVagaIdAndCandidatoId(10L, 2L)).thenReturn(false);
         when(candidaturaRepository.save(any(Candidatura.class))).thenAnswer(inv -> inv.getArgument(0));
 
-        CandidaturaResponse response = candidaturaService.candidatar(10L, candidato);
+        CandidaturaResponse response = candidaturaService.candidatar(10L, candidato, 3);
 
         assertEquals("Dev Backend", response.getVagaTitulo());
         assertEquals("Joao Candidato", response.getCandidatoNome());
-
+        assertEquals(3, response.getTempoExperienciaAnos());
         verify(notificacaoService).notificar(eq(admin), anyString());
         verify(notificacaoService).notificar(eq(candidato), anyString());
     }

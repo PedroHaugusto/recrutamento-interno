@@ -7,4 +7,9 @@ export interface Candidatura {
   candidatoNome: string;
   status: StatusCandidatura;
   dataCandidatura: string;
+  tempoExperienciaAnos: number | null;
+}
+
+export interface CandidaturaRequest {
+  tempoExperienciaAnos: number;
 }

@@ -55,4 +55,7 @@ public class Candidatura {
     @CreationTimestamp
     @Column(name = "data_candidatura", nullable = false, updatable = false)
     private LocalDateTime dataCandidatura;
+
+    @Column(name = "tempo_experiencia_anos")
+    private Integer tempoExperienciaAnos;
 }

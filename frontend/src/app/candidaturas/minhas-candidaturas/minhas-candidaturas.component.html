@@ -1,7 +1,7 @@
 <div class="pagina-candidaturas">
   <header class="cabecalho">
     <h1>Minhas Candidaturas</h1>
-    <p>Acompanhe o status das vagas para as quais voce se candidatou</p>
+    <p>Acompanhe o status das vagas para as quais você se candidatou</p>
   </header>
 
   @if (carregando()) {
@@ -11,7 +11,7 @@
   } @else if (candidaturas().length === 0) {
   <div class="estado-vazio">
     <mat-icon>assignment_late</mat-icon>
-    <p>Voce ainda nao se candidatou a nenhuma vaga.</p>
+    <p>Você ainda não se candidatou a nenhuma vaga.</p>
   </div>
   } @else {
   <div class="lista-candidaturas">
@@ -21,6 +21,12 @@
         <div class="info-principal">
           <h3>{{ candidatura.vagaTitulo }}</h3>
           <p class="data">Candidatura enviada em {{ formatarData(candidatura.dataCandidatura) }}</p>
+          @if (candidatura.tempoExperienciaAnos !== null) {
+          <p class="experiencia">
+            Experiência informada: {{ candidatura.tempoExperienciaAnos }}
+            {{ candidatura.tempoExperienciaAnos === 1 ? 'ano' : 'anos' }}
+          </p>
+          }
         </div>
 
         <mat-chip [class]="'selo-status selo-status--' + candidatura.status.toLowerCase()">
